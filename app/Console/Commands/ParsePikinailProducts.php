@@ -39,27 +39,28 @@ class ParsePikinailProducts extends Command
         $categories = Category::get();
         foreach ($categories as $category) {
             /** @var Category $category */
-            $siteLink = $category->getPikiUrl() . '?SHOWALL_1=1';
+            $siteLink        = $category->getPikiUrl() . '?SHOWALL_1=1';
             $contentResponse = Http::get($siteLink);
             if ($contentResponse->ok()) {
-                $content = $contentResponse->body();
-                $crawler = new Crawler($content);
-                $contentWrapper = $crawler->filterXPath('//div[contains(@class, "items_wrapper")]')->first();
+                $content           = $contentResponse->body();
+                $crawler           = new Crawler($content);
+                $contentWrapper    = $crawler->filterXPath('//div[contains(@class, "items_wrapper")]')->first();
                 $productsNodesData = $contentWrapper->filterXPath('//div[contains(@class, "catalog-block-view__item")]')
-                    ->each(function (Crawler $node, $i) {
-                        $imgNode = $node->filterXPath('//img[contains(@class, "img-responsive")]')->first();
+                    ->each(function (Crawler $node, $i) use ($category) {
+                        $imgNode   = $node->filterXPath('//img[contains(@class, "img-responsive")]')->first();
                         $priceNode = $node->filterXPath('//span[contains(@class, "price_value")]')->first();
-                        $urlNode = $node->filterXPath('//a[contains(@class, "thumb")]')->first();
+                        $urlNode   = $node->filterXPath('//a[contains(@class, "thumb")]')->first();
 
                         try {
                             $result = [
-                                'url'     => $urlNode->attr('href'),
-                                'img_src' => $imgNode->attr('data-src'),
-                                'name'    => $imgNode->attr('alt'),
-                                'price'   => (int)$priceNode->html(),
+                                'url'         => $urlNode->attr('href'),
+                                'img_src'     => $imgNode->attr('data-src'),
+                                'name'        => $imgNode->attr('alt'),
+                                'price'       => (int)$priceNode->html(),
+                                'category_id' => $category->getKey(),
                             ];
 
-                        }catch (\Exception $exception){
+                        } catch (\Exception $exception) {
                             dd($i);
                         }
 
@@ -72,10 +73,11 @@ class ParsePikinailProducts extends Command
                     $category = Product::where('name', $productData['name'])->first();
                     if ($category === null) {
                         /** @var Product $product */
-                        $product = Product::create([
+                        $product    = Product::create([
                             'piki_url'    => 'https://pikinail.ru' . $productData['url'],
                             'name'        => $productData['name'],
                             'description' => null,
+                            'category_id' => $productData['category_id'],
                             'price'       => $productData['price'],
                             'img_url'     => 'https://pikinail.ru' . $productData['img_src'],
                         ]);

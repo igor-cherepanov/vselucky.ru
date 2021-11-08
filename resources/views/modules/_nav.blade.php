@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel mb-3" style="background-color: #a46cda;">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel mb-3" style="background-color: #de70c3;">
     <div class="container">
         <a class="navbar-brand text-white" href="/">vselucky</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -7,12 +7,12 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-{{--            <ul class="navbar-nav mr-auto">--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="{{  route('crm.events.index') }}" class="nav-link">--}}
-{{--                        Мероприятия--}}
-{{--                    </a>--}}
-{{--                </li>--}}
+            <ul class="navbar-nav mr-auto">
+                <li class="ml-5 nav-item">
+                    <a href="{{  route('home') }}" class="nav-link text-white">
+                        Каталог
+                    </a>
+                </li>
 {{--                <li class="nav-item">--}}
 {{--                    <a href="{{  route('crm.info.index') }}" class="nav-link">--}}
 {{--                        Объявления--}}

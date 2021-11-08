@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 pb-3">
-                <h1 style="font-weight: 900;">Каталог</h1>
+                <h1 style="font-weight: 900;">{{$category->getName()}}</h1>
             </div>
             <div class="col-md-12">
                 <div class="row justify-content-center">
@@ -17,16 +17,11 @@
                                         <img class="card-img-top" src="{{$category->getImgUrl()}}" alt="Card image cap">
                                     </div>
                                     <div class="col-8">
-                                        <h5 class="card-title" style="font-weight: 600;">
-                                            <a href="{{route('categories.show', $category)}}" style="color: black">
-                                            {{$category->getName()}}
-                                            </a>
-                                        </h5>
+                                        <h5 class="card-title" style="font-weight: 600;">{{$category->getName()}}</h5>
                                         <p class="card-text">
                                             @forelse($category->getChildren() as $keyChild=>$children)
                                                 @if($keyChild < 8)
-                                                    <a href="{{route('categories.show', $children)}}"
-                                                       style="color: #da5abb">{{$children->getName()}}</a>
+                                                    <a href="" style="color: #da5abb">{{$children->getName()}}</a>
                                                     @if($keyChild < 7)
                                                         ,
                                                     @endif

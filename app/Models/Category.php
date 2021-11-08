@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Category
@@ -30,6 +32,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $piki_url
  * @property string|null $img_url
  * @method static \Illuminate\Database\Eloquent\Builder|Category whereImgUrl($value)
+ * @property-read Collection|Category[] $children
+ * @property-read int|null $children_count
+ * @property-read Collection|\App\Models\Product[] $products
+ * @property-read int|null $products_count
  */
 class Category extends Model
 {
@@ -132,5 +138,36 @@ class Category extends Model
         $this->img_url = $img_url;
     }
 
+    /**
+     * @return HasMany
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
 
 }
