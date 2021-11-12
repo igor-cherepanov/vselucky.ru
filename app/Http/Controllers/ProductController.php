@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index(Request $request, Category $category)
     {
         $products = $category->getProducts();
-
+        $products = Product::all();
         return view('site.products.index', compact('products'));
     }
 
