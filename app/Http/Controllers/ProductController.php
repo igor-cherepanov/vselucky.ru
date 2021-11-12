@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function index(Request $request, Category $category)
     {
-            $products = $category->getProducts();
+        $products = $category->getProducts();
 
         return view('site.products.index', compact('products'));
     }
