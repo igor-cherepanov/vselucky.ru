@@ -9,13 +9,9 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    public function index(Request $request, ?Category $category)
+    public function index(Request $request, Category $category)
     {
-        if (isset($category)) {
             $products = $category->getProducts();
-        } else {
-            $products = Product::get();
-        }
 
         return view('site.products.index', compact('products'));
     }
