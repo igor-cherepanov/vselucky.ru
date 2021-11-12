@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::get();
+        $categories = Category::filterParentCategories()->get();
 
         return view('site.categories.index', compact('categories'));
     }
