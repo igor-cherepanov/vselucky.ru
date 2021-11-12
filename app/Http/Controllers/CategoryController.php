@@ -21,14 +21,7 @@ class CategoryController extends Controller
     public function show(Request $request, Category $category)
     {
         $categories = $category->getChildren();
-        if (count($categories) < 1) {
-            $products = $category->getProducts();
-            $response = view('site.products.index', compact('category', 'products'));
-        } else {
-            $response = view('site.categories.show', compact('category', 'categories'));
-        }
-
-        return $response;
+        return view('site.categories.show', compact('category', 'categories'));
     }
 
 }

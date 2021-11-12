@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\CategoryController::class, 'index'])->name('home');
 Route::get('/categories/{category}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
+Route::get('/products/{?category}', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
 
 /**
  * AUTH ACCESS

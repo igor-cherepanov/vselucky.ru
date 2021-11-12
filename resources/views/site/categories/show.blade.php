@@ -17,7 +17,9 @@
                                         <img class="card-img-top" src="{{$category->getImgUrl()}}" alt="Card image cap">
                                     </div>
                                     <div class="col-8">
-                                        <h5 class="card-title" style="font-weight: 600;">{{$category->getName()}}</h5>
+                                        <h5 class="card-title" style="font-weight: 600;">
+                                            <a href="{{route('products.index', $category)}}">{{$category->getName()}}</a>
+                                        </h5>
                                         <p class="card-text">
                                             @forelse($category->getChildren() as $keyChild=>$children)
                                                 @if($keyChild < 8)
