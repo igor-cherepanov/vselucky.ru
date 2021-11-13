@@ -18,12 +18,13 @@
                                     </div>
                                     <div class="col-8">
                                         <h5 class="card-title" style="font-weight: 600;">
-                                            <a href="{{route('categories.show', $product)}}" style="color: black">
+                                            <a href="{{route('products.show',$category, $product)}}"
+                                               style="color: black">
                                                 {{$product->getName()}}
                                             </a>
                                         </h5>
                                         <p class="card-text">
-                                            {{$product->getPrice()}}
+                                            {{$product->getPrice()}} руб.
                                         </p>
                                     </div>
                                 </div>
